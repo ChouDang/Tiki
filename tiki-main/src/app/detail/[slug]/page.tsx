@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { CheckIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 
@@ -10,42 +10,84 @@ import {
   ReceiptRefundIcon,
   CubeIcon,
 } from '@heroicons/react/24/outline';
-import { Input, InputRef, Rate, Tooltip } from 'antd';
+import { Input, InputRef, notification, Rate, Tooltip } from 'antd';
 import { formatCurrency } from '@/utils';
 import { SliderBanner } from '@/components/home';
 import { ListProduct } from '@/components/shared';
 import products from '@/data/products.json';
 import { CardProduct } from '@/components/shared/CardProduct';
+import { useRouter, useSearchParams } from 'next/navigation';
+import useApiRestaurants from '@/apis/useApiRestaurants';
+import { useCart } from '@/context/CartContext';
+
+type CustomSelectProduct = {
+  quantity: number
+} & Food
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [image, setImage] = useState<string>('/products/belt-1.png');
+  const { state, dispatch } = useCart()
+  const { slug: id } = params
+  const searchParams = useSearchParams()
   const inputRef = useRef<InputRef>(null);
+  const [store, set_store] = useState<any>({})
+  const [product, set_product] = useState<any>({})
+  const [count, set_count] = useState(1)
+  const router = useRouter()
+  console.log(product, count, state, "product")
   const handlePrice = (type: string) => {
     switch (type) {
       case '+': {
-        if (inputRef.current?.input) {
-          inputRef.current.input.value = (
-            parseInt(inputRef.current.input.value) + 1
-          ).toString();
-        }
+        set_count(prev => prev + 1)
 
         break;
       }
       case '-': {
-        if (inputRef.current?.input) {
-          if (parseInt(inputRef.current.input.value) <= 1) return;
-          inputRef.current.input.value = (
-            parseInt(inputRef.current.input.value) - 1
-          ).toString();
-          console.log('minus');
+        if (count > 1) {
+          set_count(prev => prev - 1)
         }
-
         break;
       }
       default:
         console.log('default');
     }
   };
+
+  const { getRestaurantById } = useApiRestaurants()
+
+  useEffect(() => {
+    if (id) {
+      getRestaurantById(searchParams.get("idStore") as string).then(resp => {
+        if (resp) {
+
+          set_store(resp.data)
+          let product = resp.data.foods.find(i => i.id === id)
+          product = { ...product, quantity: 1 } as CustomSelectProduct
+          set_product(product)
+        }
+      })
+    }
+  }, [id])
+
+  const onBuyNow = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: { ...product, quantity: count }
+    })
+    setTimeout(() => router.push('/cart'), 0)
+  }
+
+  const onAddFoodToCard = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: { ...product, quantity: count }
+    })
+    notification.open({
+      message: "Thêm giỏ hàng thành công",
+    });
+  }
+
+
   return (
     <div className='flex flex-row mb-5 gap-6 w-[90%]'>
       <div className='flex flex-col w-[27%] bg-white p-4 rounded-md sticky h-fit top-5'>
@@ -143,12 +185,11 @@ export default function Page({ params }: { params: { slug: string } }) {
               unoptimized
             />
             <span className='text-sm'>
-              Thương hiệu: <span className='text-blue-500'>Nutushop</span>
+              Thương hiệu: <span className='text-blue-500'>{store?.name || ''}</span>
             </span>
           </div>
           <span className='font-medium text-2xl mt-2 inline-block'>
-            Thắt lưng nam dây nịt nam chất liệu da bò thật khóa tự động hàng
-            hiệu cao cấp NT302 - Nutushop
+            {product?.name || ''}
           </span>
           <div className='flex flex-row items-center gap-2 mt-2'>
             <span className='text-md font-medium'>4.8</span>
@@ -159,21 +200,21 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
           <div>
             <span className='font-semibold text-2xl mt-2 inline-block'>
-              {formatCurrency('vi-VN', 'VND', 320000)}
+              {formatCurrency('vi-VN', 'VND', product?.price || 0)}
             </span>
             <sup>₫</sup>
           </div>
           <div className='border border-gray-200 rounded-lg p-2 mt-2 flex flex-col'>
             <span>Giá sau khuyến mãi:</span>
             <span className='text-red-500 text-3xl font-semibold mb-2 inline-block'>
-              {formatCurrency('vi-VN', 'VND', 313000)}
+              {formatCurrency('vi-VN', 'VND', (product?.price * 90 / 100) || 0)}
               <sup>₫</sup>
             </span>
             <div className='flex flex-row items-center gap-2'>
               <CheckIcon className='size-4 text-blue-500' />
               <span className='font-medium'>
-                Giảm {formatCurrency('vi-VN', 'VND', 6400)}
-                <sup>₫</sup>
+                Giảm 10
+                <sup>%</sup>
                 <span className='ml-1 text-gray-500 font-normal'>
                   từ coupon của Tiki
                 </span>
@@ -205,7 +246,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             </span>
           </span>
         </div>
-        <div className='bg-white p-4 rounded-lg h-fit'>
+        {/* <div className='bg-white p-4 rounded-lg h-fit'>
           <span className='text-lg font-semibold block mb-2'>Ưu đãi khác</span>
           <div className='flex flex-row justify-between'>
             <span>10 Mã giảm giá</span>
@@ -219,11 +260,11 @@ export default function Page({ params }: { params: { slug: string } }) {
               <ChevronRightIcon className='size-7 text-gray-500' />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className='bg-white p-4 rounded-lg h-fit'>
-          <span className='text-lg font-semibold block mb-2'>
+          {/* <span className='text-lg font-semibold block mb-2'>
             Dịch vụ bổ sung
-          </span>
+          </span> */}
 
           <div className='flex flex-row justify-between items-center'>
             <div className='gap-2 flex flex-row items-center'>
@@ -261,15 +302,22 @@ export default function Page({ params }: { params: { slug: string } }) {
             Sản phẩm liên quan
           </span>
           <div className='flex flex-row flex-wrap gap-3'>
-            {products.slice(0, 10).map((product: any, index) => (
-              <CardProduct className='w-[23%]' key={index} data={product} />
-            ))}
+            {store && store?.foods?.length ? store.foods.filter((i: any) => i.id != id).map((product: any) => {
+              product = {
+                ...product,
+                madeIn: store.name,
+                idStore: store.id
+              }
+              return <CardProduct className='w-[23%]' key={product.id} data={product} />
+            })
+              : <></>
+            }
           </div>
         </div>
-        <div className='bg-white p-4 rounded-lg h-fit overflow-hidden'>
+        {/* <div className='bg-white p-4 rounded-lg h-fit overflow-hidden'>
           <span className='text-lg font-semibold block mb-2'>Top deals</span>
           <ListProduct data={products.slice(0, 7)} cardStyle='w-[23%]' />
-        </div>
+        </div> */}
 
         <div className='bg-white p-4 rounded-lg h-fit'>
           <span className='text-lg font-semibold block mb-2'>
@@ -376,7 +424,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className='flex flex-row gap-2'>
             <Image src='/shop.png' width={50} height={50} alt='Tiki' />
             <div>
-              <span className='font-medium'>Nutushop</span>
+              <span className='font-medium'>{store?.name || ''}</span>
               <div className='flex flex-row items-center gap-2'>
                 <Image
                   src='/official.png'
@@ -414,7 +462,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 ref={inputRef}
                 className='w-10 h-8 text-center'
                 type='number'
-                defaultValue={1}
+                value={count}
               />
 
               <div
@@ -432,7 +480,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             </span>
             <div className='text-3xl mt-3 font-semibold flex flex-row items-center'>
               <span>
-                {formatCurrency('vi-VN', 'VND', 313000)}
+                {formatCurrency('vi-VN', 'VND', (count * product.price * 90 / 100) || 0)}
                 <sup>₫</sup>
               </span>
 
@@ -445,8 +493,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                       <div className='flex flex-row gap-2 items-center text-lg'>
                         <CheckIcon className='size-4 text-blue-500' />
                         <div className='text-md font-medium'>
-                          {formatCurrency('vi-VN', 'VND', 6400)}
-                          <sup>₫</sup>
+                          10
+                          <sup>%</sup>
                         </div>
                       </div>
                       <span className='text-gray-500 text-md'>
@@ -463,15 +511,15 @@ export default function Page({ params }: { params: { slug: string } }) {
               </Tooltip>
             </div>
             <div>
-              <button className='bg-red-500 text-white rounded-md w-full h-10 mt-3'>
+              <button className='bg-red-500 text-white rounded-md w-full h-10 mt-3' onClick={() => onBuyNow()}>
                 Mua ngay
               </button>
-              <button className='bg-white text-blue-500 border border-blue-500 rounded-md w-full h-10 mt-3'>
+              <button className='bg-white text-blue-500 border border-blue-500 rounded-md w-full h-10 mt-3' onClick={() => onAddFoodToCard()}>
                 Thêm vào giỏ
               </button>
-              <button className='bg-white text-blue-500 border border-blue-500 rounded-md w-full h-10 mt-3'>
+              {/* <button className='bg-white text-blue-500 border border-blue-500 rounded-md w-full h-10 mt-3'>
                 Mua trước trả sau
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

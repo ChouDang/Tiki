@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/app/globals.css';
 import { Header, Footer } from '@/components/shared';
+import { UserProvider } from '@/context/UserContext';
+import { CartProvider } from '@/context/CartContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,18 +17,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <link rel='icon' href='/favicon.png' />
-      <body className={inter.className}>
-        <Header />
-        <main className='flex justify-center flex-col mt-5 w-full'>
-          <div className='w-full flex justify-center flex-col items-center ml-0'>
-            {children}
-          </div>
-        </main>
+    <UserProvider>
+      <CartProvider>
+        <html lang='en'>
+          <link rel='icon' href='/favicon.png' />
+          <body className={inter.className}>
+            <Header />
+            <main className='flex justify-center flex-col mt-5 w-full'>
+              <div className='w-full flex justify-center flex-col items-center ml-0'>
+                {children}
+              </div>
+            </main>
 
-        <Footer />
-      </body>
-    </html>
+            <Footer />
+          </body>
+        </html>
+      </CartProvider >
+    </UserProvider>
   );
 }

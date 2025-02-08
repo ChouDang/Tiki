@@ -1,34 +1,25 @@
+import { useCart } from '@/context/CartContext';
 import { formatCurrency } from '@/utils';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { Checkbox, InputNumber } from 'antd';
+import { Checkbox, Input, InputNumber } from 'antd';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
 type PropsType = {
   product: any;
+  dispatch: any;
 };
-export const ItemCart = ({ product }: PropsType) => {
-  const [amount, setAmount] = useState(1);
-  const handleChangeAmount = (type: string) => {
-    switch (type) {
-      case '+':
-        setAmount(amount + 1);
-        break;
-      case '-':
-        if (amount === 1) return;
-        setAmount(amount - 1);
-        break;
-      default:
-        break;
-    }
-  };
+export const ItemCart = ({ product, dispatch }: PropsType) => {
+
+  console.log(product, "product")
   return (
     <div className='ml-2 flex mb-5'>
       <div className='flex w-[45%] w-max-[45%] flex-row items-center'>
-        <Checkbox />
+        {/* <Checkbox /> */}
         <Image
           className='w-[80px] h-[80px] mx-3'
-          src={product.image}
+          // src={product.img}
+          src={'/products/belt-1.png'}
           alt='product'
           width={80}
           height={80}
@@ -54,8 +45,7 @@ export const ItemCart = ({ product }: PropsType) => {
             />
           </div>
           <span className='text-sm'>
-            Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
-            cillum sint consectetur cupidatat.
+            {product.name || ''}
           </span>
           <div className='flex flex-row items-center gap-1'>
             <Image
@@ -74,41 +64,48 @@ export const ItemCart = ({ product }: PropsType) => {
         <sup>₫</sup>
       </span>
       <div className='w-[15%] w-max-[15%] flex items-center'>
-        <InputNumber
-          className='w-[55%] flex justify-center items-center text-center'
-          defaultValue={amount}
-          value={amount}
-          controls={false}
-          keyboard={false}
-          variant='filled'
-          addonAfter={
-            <div
-              className='cursor-pointer'
-              onClick={() => {
-                handleChangeAmount('+');
-              }}
-            >
-              +
-            </div>
-          }
-          addonBefore={
-            <div
-              className='cursor-pointer'
-              onClick={() => {
-                handleChangeAmount('-');
-              }}
-            >
-              -
-            </div>
-          }
+        <div
+          className='w-10 cursor-pointer hover:bg-gray-100 text-gray-500 text-2xl font-semibold h-8 flex items-center justify-center border rounded-md border-gray-200'
+          onClick={() => {
+            if (product.quantity > 1) {
+              dispatch({
+                type: "CHANGE_QUANTITY_CART",
+                payload: { ...product, quantity: product.quantity - 1 }
+              })
+            }
+          }}
+        >
+          -
+        </div>
+        <Input
+          className='w-10 h-8 text-center'
+          type='number'
+          value={product.quantity}
         />
+
+        <div
+          className='w-10 cursor-pointer hover:bg-gray-100  text-gray-500 text-2xl font-semibold h-8 flex items-center justify-center border rounded-md border-gray-200'
+          onClick={() => {
+            dispatch({
+              type: "CHANGE_QUANTITY_CART",
+              payload: { ...product, quantity: product.quantity + 1 }
+            })
+          }}
+        >
+          +
+        </div>
       </div>
 
       <span className='font-semibold text-red-500 w-[15%] w-max-[15%] flex items-center'>
-        {formatCurrency('vi-VN', 'VND', product.price * amount)}
+        {formatCurrency('vi-VN', 'VND', product.price * product.quantity)}
         <sup>₫</sup>
       </span>
-      <div className='text-gray-500 w-[10%] pr-5 flex justify-end items-center'>
+      <div className='text-gray-500 w-[10%] pr-5 flex justify-end items-center' onClick={() => {
+        dispatch({
+          type: "REMOVE_FROM_CART",
+          payload: product
+        })
+      }}>
         <TrashIcon className='size-5' />
       </div>
     </div>

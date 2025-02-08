@@ -7,9 +7,9 @@ import Link from 'next/link';
 type PropsType = {
   data: {
     id: string;
-    image: string;
-    name: string;
+    img: string;
     title: string;
+    name: string;
     price: number;
     star?: number;
     isTopDeal?: boolean;
@@ -33,39 +33,46 @@ export const CardProduct = ({
 }: PropsType & AllHTMLAttributes<HTMLDivElement>) => {
   const {
     id,
-    image,
+    img,
     title,
+    name,
     price,
-    star,
-    isTopDeal,
-    isAuthentic,
+    star = 4.5,
+    isTopDeal = true,
+    isAuthentic = true,
     sale,
-    shipping,
     isGlobal,
-    madeIn,
+    shipping = {
+      "type": "fast",
+      "date": "3h"
+    },
+    madeIn = "facilis"
   } = data;
+
   return (
     <Link
-      href={`/detail/${id}`}
+      href={`/detail/${id}?idStore=${(data as any)?.idStore || ''} `}
       className={`w-[16%]  border bg-white border-gray-200 pb-1 rounded-md flex flex-col gap-1 hover:shadow-[0px_0px_20px_0px_rgba(0,0,0,0.1)] cursor-pointer flex-shrink-0 ${rest.className}`}
+
     >
       <Image
-        src={image}
+        // src={img}
+        src={'/products/belt-1.png'}
         width={200}
         height={200}
-        alt={title}
+        alt={name}
         unoptimized
         className='rounded-tl-md w-full rounded-tr-md'
       />
       <div className='flex flex-col gap-1'>
-        <div className='flex flex-col gap-1 min-h-40'>
-          <div className='flex flex-col gap-1 mt-0.5 ml-1.5 min-h-12'>
+        <div className='flex flex-col gap-1 min-h-30'>
+          {/* <div className='flex flex-col gap-1 mt-0.5 ml-1.5 min-h-12'>
             {isTopDeal && (
               <Image
                 src={'/top-deal-1.png'}
                 width={80}
                 height={20}
-                alt={title}
+                alt={name}
                 unoptimized
               />
             )}
@@ -74,13 +81,13 @@ export const CardProduct = ({
                 src={'/chinh-hang.png'}
                 width={80}
                 height={20}
-                alt={title}
+                alt={name}
                 unoptimized
               />
             )}
-          </div>
+          </div> */}
           <div className='text-xs leading-4 ml-1.5 max-h-8 h-20 line-clamp-2'>
-            {title}
+            {name}
           </div>
           <Rate
             className='block text-[10px] ml-1.5 [&>li]:!me-0.5 text-yellow-400'
@@ -122,7 +129,7 @@ export const CardProduct = ({
           </div>
         </div>
         <div className='mb-3.5 ml-2.5'>
-          {madeIn && <div className=' text-[10px] h-0'>Made in {madeIn}</div>}
+          {madeIn && <div className=' text-[10px] h-0'>{madeIn}</div>}
         </div>
         <hr className='block w-[90%] self-center' />
 
