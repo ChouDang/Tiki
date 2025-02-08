@@ -34,7 +34,6 @@ tiki-main/*.tsbuildinfo
 tiki-main/next-env.d.ts
 
 
-BE_tiki/**/node_modules/
 # --- BE_tiki specific ignores ---
 BE_tiki/api-gateway/node_modules/
 BE_tiki/identity-service/node_modules/
@@ -207,3 +206,37 @@ BE_tiki/identity-service/.temp
 BE_tiki/notification-service/.temp
 BE_tiki/payment-service/.temp
 BE_tiki/product-service/.temp
+BE_tiki/api-gateway/.tmp
+BE_tiki/identity-service/.tmp
+BE_tiki/notification-service/.tmp
+BE_tiki/payment-service/.tmp
+BE_tiki/product-service/.tmp
+
+# Runtime data
+BE_tiki/api-gateway/pids
+BE_tiki/identity-service/pids
+BE_tiki/notification-service/pids
+BE_tiki/payment-service/pids
+BE_tiki/product-service/pids
+BE_tiki/api-gateway/*.pid
+BE_tiki/identity-service/*.pid
+BE_tiki/notification-service/*.pid
+BE_tiki/payment-service/*.pid
+BE_tiki/product-service/*.pid
+BE_tiki/api-gateway/*.seed
+BE_tiki/identity-service/*.seed
+BE_tiki/notification-service/*.seed
+BE_tiki/payment-service/*.seed
+BE_tiki/product-service/*.seed
+BE_tiki/api-gateway/*.pid.lock
+BE_tiki/identity-service/*.pid.lock
+BE_tiki/notification-service/*.pid.lock
+BE_tiki/payment-service/*.pid.lock
+BE_tiki/product-service/*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+BE_tiki/api-gateway/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+BE_tiki/identity-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+BE_tiki/notification-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+BE_tiki/payment-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+BE_tiki/product-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
