@@ -1,0 +1,40 @@
+version: "3"
+services: 
+  api-gateway:
+    container_name: api-gateway
+    build: ./BE_tiki/api-gateway 
+    ports:
+      - 8080:8080
+    networks:
+      - node-network
+
+  identity-service:
+    container_name: identity-service
+    build: ./BE_tiki/identity-service
+    networks:
+      - node-network
+
+  notification-service:
+    container_name: notification-service
+    build: ./BE_tiki/notification-service 
+    networks:
+      - node-network
+
+  payment-service:
+    container_name: payment-service
+    build: ./BE_tiki/payment-service
+    networks:
+      - node-network
+
+  product-service:
+    container_name: product-service
+    build: ./BE_tiki/product-service
+    networks:
+      - node-network
+
+
+networks:
+  node-network:
+    external: true # sử dụng mạng có sẵn trước đó
+
+# docker-compose up -d

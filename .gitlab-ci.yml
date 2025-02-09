@@ -1,0 +1,68 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      when: never
+    - when: always
+
+
+variables:
+  # IMAGE_NAME: $CI_REGISTRY_IMAGE
+  PROD_IP: 54.176.53.212
+  PROD_ENDPOINT: "https://ec2-47-129-63-60.ap-southeast-1.compute.amazonaws.com/:3000"
+
+stages:
+  - build
+  - deploy
+
+.build:
+  stage: build
+  tags:
+    - docker
+  variables:
+    MICRO_SERVICE: ""
+  before_script:
+    - cd $MICRO_SERVICE
+    - apk add --no-cache jq
+    - jq --version
+    - export APP_VERSION=$(cat package.json | jq -r .version)
+    - export VERSION=$APP_VERSION.$CI_PIPELINE_IID
+    - export IMAGE_NAME=$CI_REGISTRY_IMAGE/$MICRO_SERVICE
+    - echo $VERSION > version.txt
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - docker build -t $IMAGE_NAME:$VERSION .
+    - docker push $IMAGE_NAME:$VERSION
+  artifacts:
+    paths:
+      - $MICRO_SERVICE/version.txt
+
+build_frontend:
+  extend: .build
+  variables:
+    MICRO_SERVICE: "tiki-main"
+
+build_api-gateway:
+  extend: .build
+  variables:
+    MICRO_SERVICE: "BE_tiki/api-gateway"
+
+build_identity-service:
+  extend: .build
+  variables:
+    MICRO_SERVICE: "BE_tiki/identity-service"
+
+build_notification-service:
+  extend: .build
+  variables:
+    MICRO_SERVICE: "BE_tiki/notification-service"
+
+
+build_payment-service:
+  extend: .build
+  variables:
+    MICRO_SERVICE: "BE_tiki/payment-service"
+
+build_product-service:
+  extend: .build
+  variables:
+    MICRO_SERVICE: "BE_tiki/product-service"
