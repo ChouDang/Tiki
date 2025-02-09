@@ -1,6 +1,7 @@
 FROM node:20
 
-WORKDIR /root/payment-service
+# WORKDIR /root/payment-service
+WORKDIR /home/ubuntu/BE_tiki/Tiki/payment-service
 
 COPY package.json .
    

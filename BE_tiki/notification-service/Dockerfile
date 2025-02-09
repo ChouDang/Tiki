@@ -1,6 +1,7 @@
 FROM node:20
 
-WORKDIR /root/notification-service
+# WORKDIR /root/notification-service
+WORKDIR /home/ubuntu/Tiki/BE_tiki/notification-service
 
 COPY package.json .
 

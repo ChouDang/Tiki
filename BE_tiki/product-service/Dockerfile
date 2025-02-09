@@ -1,6 +1,7 @@
 FROM node:20
 
-WORKDIR /root/product-service
+# WORKDIR /root/product-service
+WORKDIR /home/ubuntu/Tiki/BE_tiki/product-service
 
 COPY package.json .
 

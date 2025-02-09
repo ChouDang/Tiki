@@ -1,6 +1,7 @@
 FROM node:20
 
-WORKDIR /root/fe-tiki
+# WORKDIR /root/tiki-main
+WORKDIR /home/ubuntu/Tiki/tiki-main
 
 COPY package.json yarn.lock ./
 
