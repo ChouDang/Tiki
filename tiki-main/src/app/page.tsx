@@ -38,7 +38,7 @@ export default function Home() {
   // danh sach theo danh muc 
   useEffect(() => {
     if (select) {
-      if (!opts.length) {
+      if (!items.length) {
         let checkStoreLocal = localStorage.getItem("allCategory")
         if (!!checkStoreLocal) {
           set_items(JSON.parse(checkStoreLocal))
@@ -49,7 +49,7 @@ export default function Home() {
         } else {
           getAllCategory()
             .then(resp => {
-              if (resp && Array.isArray(resp) && resp.length) {
+              if (resp && Array.isArray(resp.data) && resp.data?.length) {
                 set_items(resp.data)
                 set_opts([{ id: "all", name: "Tất cả", value: "all", label: 'Tất cả' }, ...resp.data.map(x => ({ ...x, value: x.id, label: x.name })) as OptsCategory[]])
               }
