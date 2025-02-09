@@ -9,7 +9,8 @@ import { ListBrand } from '@/components/home/ListBrand';
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { CardProduct } from '@/components/shared/CardProduct';
 import useApiCatory from '@/apis/useApiCatory';
-import { useParams, useSearchParams } from 'next/navigation';
+// import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import useApiRestaurants from '@/apis/useApiRestaurants';
 
 
@@ -22,7 +23,7 @@ export default function Home() {
 
   const [items, set_items] = useState<Category[]>([])
   const params = useParams()
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   // const { id } = params || {}
   // const [products, set_products] = useState([])
   const [select, set_select] = useState("all")
@@ -37,7 +38,7 @@ export default function Home() {
   const [isShowRes, set_isShowRes] = useState(true)
   // danh sach theo danh muc 
   useEffect(() => {
-    if (select && !blockFetch.current && searchParams) {
+    if (select && !blockFetch.current) {
       if (!opts.length) {
         let checkStoreLocal = localStorage.getItem("allCategory")
         if (!!checkStoreLocal) {
@@ -57,7 +58,7 @@ export default function Home() {
             )
         }
       }
-      getRestaurantsByIdCategory(select as string, pagi.page, 100, (searchParams.get("query") || "") as string).then(i => {
+      getRestaurantsByIdCategory(select as string, pagi.page, 100, ("") as string).then(i => {
         if (i?.data) {
           let idata: CustomRestaurant = i.data
           set_lstData((idata.data || []) as Restaurant[])
