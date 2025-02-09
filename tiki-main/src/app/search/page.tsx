@@ -3,13 +3,10 @@ import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 // import products from '@/data/products.json';
 import { CardProduct } from '@/components/shared/CardProduct';
 import { useRouter, useSearchParams } from 'next/navigation';
-import useApiCatory from '@/apis/useApiCatory';
 import useApiRestaurants from '@/apis/useApiRestaurants';
 
-export default function Page() {
+const DetailSearchPage = () => {
   const searchParams = useSearchParams()
-  const router = useRouter()
-  const { getAllCategory } = useApiCatory()
   const { getRestaurantsByIdCategory } = useApiRestaurants()
   let id = 'all'
 
@@ -17,12 +14,11 @@ export default function Page() {
   const [select, set_select] = useState("")
   const [lstData, set_lstData] = useState<Restaurant[]>([])
   const [pagi, set_pagi] = useState({
-      page: 1,
-      size: 9,
-      total: 0
+    page: 1,
+    size: 9,
+    total: 0
   })
   const blockFetch = useRef(false)
-
 
   useEffect(() => {
     if (id && !blockFetch.current && searchParams) {
@@ -54,19 +50,24 @@ export default function Page() {
     return []
   }, [lstData, pagi.size])
 
+  return (<div className='flex flex-row flex-wrap gap-2 mb-5'>
+    {products.map((product: any) => (
+      <CardProduct
+        className='w-[23%]'
+        key={product.id}
+        data={product}
+      />
+    ))}
+  </div>)
+}
+
+
+export default function Page() {
   return (
     <>
       <nav>
         <Suspense fallback={<></>}>
-          <div className='flex flex-row flex-wrap gap-2 mb-5'>
-            {products.map((product: any) => (
-              <CardProduct
-                className='w-[23%]'
-                key={product.id}
-                data={product}
-              />
-            ))}
-          </div>
+          <DetailSearchPage />
         </Suspense>
       </nav>
     </>
