@@ -1,0 +1,49 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        service:
+          - "BE_tiki/api-gateway"
+          - "BE_tiki/identity-service"
+          - "BE_tiki/notification-service"
+          - "BE_tiki/payment-service"
+          - "BE_tiki/product-service"
+          - "tiki-main"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: ${{ matrix.service }}/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd ${{ matrix.service }}
+          npm ci
+
+      - name: Create .env file
+        run: |
+          cd ${{ matrix.service }}
+          touch .env
+          echo "${{ secrets.PROD_ENV }}" > .env
+
+      - name: Build project
+        run: |
+          cd ${{ matrix.service }}
+          npm run build
