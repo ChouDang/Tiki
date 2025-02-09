@@ -8,6 +8,7 @@
 - GitHub Actions: Thiết lập pipeline tự động build & deploy lên EC2.
 - EC2: t3.medium thêm 25GB và config kết nối EC2 với SG
 - EC2 Deployment: Github Action => SSH EC2 => Test, Build => Run Docker trên EC2
+- Monitor: AWS Console (Ram, CPU), ELK 
 
 ## Tech
 - Microservice with NestJS
@@ -26,11 +27,12 @@
 ## Feature
 - Đăng nhập, đăng ký, JWT
 - Redis lưu cache categories, restaurants => tối ưu Get với cache
-- ELK stack thu thập log các service vào index:service-logs-%{+YYYY.MM.dd}, đồng bộ Elastic table (restaurants, product) đã config trong logstash.conf
+- ELK stack thu thập log các service vào index:service-logs-%{+YYYY.MM.dd}
+- đồng bộ Elastic table (restaurants, product) đã config trong logstash.conf
 - Tìm kiếm với elasticsearch danh sách  restaurants theo categories ( phân trang, search (product.name, restaurant.name)) 
-- Tối ưu elasticsearch với redis 1 số tìm kiếm thường xuống 
+- Tối ưu elasticsearch và redis với 1 số tìm kiếm thường dùng
 - Xem chi tiết Product với thông tin cửa hàng và các Product khác của cửa hàng
-- Giỏ hàng có thể thêm nhiều product của nhiều restaurant thanh toán 1 lần 
+- Giỏ hàng có thể thêm nhiều product thanh toán 1 lần  
 - Thanh toán gửi email xác nhận sau đó tự trừ tồn kho và ra đơn orders và liên kết bằng order_product sau đó 10s sẽ gửi email giao hàng thành công
 
 ##  PostgreSQL Relation Table 
