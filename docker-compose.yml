@@ -2,8 +2,8 @@ version: "3"
 services: 
   api-gateway:
     container_name: api-gateway
-    image: choudang/BE-tiki/api-gateway:latest
-    build: ./BE-tiki/api-gateway 
+    image: choudang/be-tiki/api-gateway:latest
+    build: ./be-tiki/api-gateway 
     ports:
       - 8080:8080
     networks:
@@ -11,29 +11,29 @@ services:
 
   identity-service:
     container_name: identity-service
-    image: choudang/BE-tiki/identity-service:latest
-    build: ./BE-tiki/identity-service
+    image: choudang/be-tiki/identity-service:latest
+    build: ./be-tiki/identity-service
     networks:
       - node-network
 
   notification-service:
     container_name: notification-service
-    image: choudang/BE-tiki/notification-service:latest
-    build: ./BE-tiki/notification-service 
+    image: choudang/be-tiki/notification-service:latest
+    build: ./be-tiki/notification-service 
     networks:
       - node-network
 
   payment-service:
     container_name: payment-service
-    image: choudang/BE-tiki/payment-service:latest
-    build: ./BE-tiki/payment-service
+    image: choudang/be-tiki/payment-service:latest
+    build: ./be-tiki/payment-service
     networks:
       - node-network
 
   product-service:
     container_name: product-service
-    image: choudang/BE-tiki/product-service:latest
-    build: ./BE-tiki/product-service
+    image: choudang/be-tiki/product-service:latest
+    build: ./be-tiki/product-service
     networks:
       - node-network
 

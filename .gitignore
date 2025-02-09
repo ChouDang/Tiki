@@ -34,209 +34,209 @@ tiki-main/*.tsbuildinfo
 tiki-main/next-env.d.ts
 
 
-# --- BE-tiki specific ignores ---
-BE-tiki/api-gateway/node_modules/
-BE-tiki/identity-service/node_modules/
-BE-tiki/notification-service/node_modules/
-BE-tiki/payment-service/node_modules/
-BE-tiki/product-service/node_modules/
+# --- be-tiki specific ignores ---
+be-tiki/api-gateway/node_modules/
+be-tiki/identity-service/node_modules/
+be-tiki/notification-service/node_modules/
+be-tiki/payment-service/node_modules/
+be-tiki/product-service/node_modules/
 
-# compiled output for BE-tiki
-BE-tiki/api-gateway/dist
-BE-tiki/identity-service/dist
-BE-tiki/notification-service/dist
-BE-tiki/payment-service/dist
-BE-tiki/product-service/dist
-BE-tiki/api-gateway/build
-BE-tiki/identity-service/build
-BE-tiki/notification-service/build
-BE-tiki/payment-service/build
-BE-tiki/product-service/build
+# compiled output for be-tiki
+be-tiki/api-gateway/dist
+be-tiki/identity-service/dist
+be-tiki/notification-service/dist
+be-tiki/payment-service/dist
+be-tiki/product-service/dist
+be-tiki/api-gateway/build
+be-tiki/identity-service/build
+be-tiki/notification-service/build
+be-tiki/payment-service/build
+be-tiki/product-service/build
 
 # Logs
-BE-tiki/api-gateway/logs
-BE-tiki/identity-service/logs
-BE-tiki/notification-service/logs
-BE-tiki/payment-service/logs
-BE-tiki/product-service/logs
-BE-tiki/api-gateway/*.log
-BE-tiki/identity-service/*.log
-BE-tiki/notification-service/*.log
-BE-tiki/payment-service/*.log
-BE-tiki/product-service/*.log
-BE-tiki/api-gateway/npm-debug.log*
-BE-tiki/identity-service/npm-debug.log*
-BE-tiki/notification-service/npm-debug.log*
-BE-tiki/payment-service/npm-debug.log*
-BE-tiki/product-service/npm-debug.log*
-BE-tiki/api-gateway/pnpm-debug.log*
-BE-tiki/identity-service/pnpm-debug.log*
-BE-tiki/notification-service/pnpm-debug.log*
-BE-tiki/payment-service/pnpm-debug.log*
-BE-tiki/product-service/pnpm-debug.log*
-BE-tiki/api-gateway/yarn-debug.log*
-BE-tiki/identity-service/yarn-debug.log*
-BE-tiki/notification-service/yarn-debug.log*
-BE-tiki/payment-service/yarn-debug.log*
-BE-tiki/product-service/yarn-debug.log*
-BE-tiki/api-gateway/yarn-error.log*
-BE-tiki/identity-service/yarn-error.log*
-BE-tiki/notification-service/yarn-error.log*
-BE-tiki/payment-service/yarn-error.log*
-BE-tiki/product-service/yarn-error.log*
-BE-tiki/api-gateway/lerna-debug.log*
-BE-tiki/identity-service/lerna-debug.log*
-BE-tiki/notification-service/lerna-debug.log*
-BE-tiki/payment-service/lerna-debug.log*
-BE-tiki/product-service/lerna-debug.log*
+be-tiki/api-gateway/logs
+be-tiki/identity-service/logs
+be-tiki/notification-service/logs
+be-tiki/payment-service/logs
+be-tiki/product-service/logs
+be-tiki/api-gateway/*.log
+be-tiki/identity-service/*.log
+be-tiki/notification-service/*.log
+be-tiki/payment-service/*.log
+be-tiki/product-service/*.log
+be-tiki/api-gateway/npm-debug.log*
+be-tiki/identity-service/npm-debug.log*
+be-tiki/notification-service/npm-debug.log*
+be-tiki/payment-service/npm-debug.log*
+be-tiki/product-service/npm-debug.log*
+be-tiki/api-gateway/pnpm-debug.log*
+be-tiki/identity-service/pnpm-debug.log*
+be-tiki/notification-service/pnpm-debug.log*
+be-tiki/payment-service/pnpm-debug.log*
+be-tiki/product-service/pnpm-debug.log*
+be-tiki/api-gateway/yarn-debug.log*
+be-tiki/identity-service/yarn-debug.log*
+be-tiki/notification-service/yarn-debug.log*
+be-tiki/payment-service/yarn-debug.log*
+be-tiki/product-service/yarn-debug.log*
+be-tiki/api-gateway/yarn-error.log*
+be-tiki/identity-service/yarn-error.log*
+be-tiki/notification-service/yarn-error.log*
+be-tiki/payment-service/yarn-error.log*
+be-tiki/product-service/yarn-error.log*
+be-tiki/api-gateway/lerna-debug.log*
+be-tiki/identity-service/lerna-debug.log*
+be-tiki/notification-service/lerna-debug.log*
+be-tiki/payment-service/lerna-debug.log*
+be-tiki/product-service/lerna-debug.log*
 
 # OS
-BE-tiki/api-gateway/.DS_Store
-BE-tiki/identity-service/.DS_Store
-BE-tiki/notification-service/.DS_Store
-BE-tiki/payment-service/.DS_Store
-BE-tiki/product-service/.DS_Store
+be-tiki/api-gateway/.DS_Store
+be-tiki/identity-service/.DS_Store
+be-tiki/notification-service/.DS_Store
+be-tiki/payment-service/.DS_Store
+be-tiki/product-service/.DS_Store
 
 # Tests
-BE-tiki/api-gateway/coverage
-BE-tiki/identity-service/coverage
-BE-tiki/notification-service/coverage
-BE-tiki/payment-service/coverage
-BE-tiki/product-service/coverage
-BE-tiki/api-gateway/.nyc_output
-BE-tiki/identity-service/.nyc_output
-BE-tiki/notification-service/.nyc_output
-BE-tiki/payment-service/.nyc_output
-BE-tiki/product-service/.nyc_output
+be-tiki/api-gateway/coverage
+be-tiki/identity-service/coverage
+be-tiki/notification-service/coverage
+be-tiki/payment-service/coverage
+be-tiki/product-service/coverage
+be-tiki/api-gateway/.nyc_output
+be-tiki/identity-service/.nyc_output
+be-tiki/notification-service/.nyc_output
+be-tiki/payment-service/.nyc_output
+be-tiki/product-service/.nyc_output
 
 # IDEs and editors
-BE-tiki/api-gateway/.idea
-BE-tiki/identity-service/.idea
-BE-tiki/notification-service/.idea
-BE-tiki/payment-service/.idea
-BE-tiki/product-service/.idea
-BE-tiki/api-gateway/.project
-BE-tiki/identity-service/.project
-BE-tiki/notification-service/.project
-BE-tiki/payment-service/.project
-BE-tiki/product-service/.project
-BE-tiki/api-gateway/.classpath
-BE-tiki/identity-service/.classpath
-BE-tiki/notification-service/.classpath
-BE-tiki/payment-service/.classpath
-BE-tiki/product-service/.classpath
-BE-tiki/api-gateway/.c9/
-BE-tiki/identity-service/.c9/
-BE-tiki/notification-service/.c9/
-BE-tiki/payment-service/.c9/
-BE-tiki/product-service/.c9/
-BE-tiki/api-gateway/*.launch
-BE-tiki/identity-service/*.launch
-BE-tiki/notification-service/*.launch
-BE-tiki/payment-service/*.launch
-BE-tiki/product-service/*.launch
-BE-tiki/api-gateway/.settings/
-BE-tiki/identity-service/.settings/
-BE-tiki/notification-service/.settings/
-BE-tiki/payment-service/.settings/
-BE-tiki/product-service/.settings/
-BE-tiki/api-gateway/*.sublime-workspace
-BE-tiki/identity-service/*.sublime-workspace
-BE-tiki/notification-service/*.sublime-workspace
-BE-tiki/payment-service/*.sublime-workspace
-BE-tiki/product-service/*.sublime-workspace
+be-tiki/api-gateway/.idea
+be-tiki/identity-service/.idea
+be-tiki/notification-service/.idea
+be-tiki/payment-service/.idea
+be-tiki/product-service/.idea
+be-tiki/api-gateway/.project
+be-tiki/identity-service/.project
+be-tiki/notification-service/.project
+be-tiki/payment-service/.project
+be-tiki/product-service/.project
+be-tiki/api-gateway/.classpath
+be-tiki/identity-service/.classpath
+be-tiki/notification-service/.classpath
+be-tiki/payment-service/.classpath
+be-tiki/product-service/.classpath
+be-tiki/api-gateway/.c9/
+be-tiki/identity-service/.c9/
+be-tiki/notification-service/.c9/
+be-tiki/payment-service/.c9/
+be-tiki/product-service/.c9/
+be-tiki/api-gateway/*.launch
+be-tiki/identity-service/*.launch
+be-tiki/notification-service/*.launch
+be-tiki/payment-service/*.launch
+be-tiki/product-service/*.launch
+be-tiki/api-gateway/.settings/
+be-tiki/identity-service/.settings/
+be-tiki/notification-service/.settings/
+be-tiki/payment-service/.settings/
+be-tiki/product-service/.settings/
+be-tiki/api-gateway/*.sublime-workspace
+be-tiki/identity-service/*.sublime-workspace
+be-tiki/notification-service/*.sublime-workspace
+be-tiki/payment-service/*.sublime-workspace
+be-tiki/product-service/*.sublime-workspace
 
 # IDE - VSCode
-BE-tiki/api-gateway/.vscode/*
-BE-tiki/identity-service/.vscode/*
-BE-tiki/notification-service/.vscode/*
-BE-tiki/payment-service/.vscode/*
-BE-tiki/product-service/.vscode/*
-!BE-tiki/api-gateway/.vscode/settings.json
-!BE-tiki/identity-service/.vscode/settings.json
-!BE-tiki/notification-service/.vscode/settings.json
-!BE-tiki/payment-service/.vscode/settings.json
-!BE-tiki/product-service/.vscode/settings.json
-!BE-tiki/api-gateway/.vscode/tasks.json
-!BE-tiki/identity-service/.vscode/tasks.json
-!BE-tiki/notification-service/.vscode/tasks.json
-!BE-tiki/payment-service/.vscode/tasks.json
-!BE-tiki/product-service/.vscode/tasks.json
-!BE-tiki/api-gateway/.vscode/launch.json
-!BE-tiki/identity-service/.vscode/launch.json
-!BE-tiki/notification-service/.vscode/launch.json
-!BE-tiki/payment-service/.vscode/launch.json
-!BE-tiki/product-service/.vscode/launch.json
-!BE-tiki/api-gateway/.vscode/extensions.json
-!BE-tiki/identity-service/.vscode/extensions.json
-!BE-tiki/notification-service/.vscode/extensions.json
-!BE-tiki/payment-service/.vscode/extensions.json
-!BE-tiki/product-service/.vscode/extensions.json
+be-tiki/api-gateway/.vscode/*
+be-tiki/identity-service/.vscode/*
+be-tiki/notification-service/.vscode/*
+be-tiki/payment-service/.vscode/*
+be-tiki/product-service/.vscode/*
+!be-tiki/api-gateway/.vscode/settings.json
+!be-tiki/identity-service/.vscode/settings.json
+!be-tiki/notification-service/.vscode/settings.json
+!be-tiki/payment-service/.vscode/settings.json
+!be-tiki/product-service/.vscode/settings.json
+!be-tiki/api-gateway/.vscode/tasks.json
+!be-tiki/identity-service/.vscode/tasks.json
+!be-tiki/notification-service/.vscode/tasks.json
+!be-tiki/payment-service/.vscode/tasks.json
+!be-tiki/product-service/.vscode/tasks.json
+!be-tiki/api-gateway/.vscode/launch.json
+!be-tiki/identity-service/.vscode/launch.json
+!be-tiki/notification-service/.vscode/launch.json
+!be-tiki/payment-service/.vscode/launch.json
+!be-tiki/product-service/.vscode/launch.json
+!be-tiki/api-gateway/.vscode/extensions.json
+!be-tiki/identity-service/.vscode/extensions.json
+!be-tiki/notification-service/.vscode/extensions.json
+!be-tiki/payment-service/.vscode/extensions.json
+!be-tiki/product-service/.vscode/extensions.json
 
 # dotenv environment variable files
-# BE-tiki/api-gateway/.env
-# BE-tiki/identity-service/.env
-# BE-tiki/notification-service/.env
-# BE-tiki/payment-service/.env
-# BE-tiki/product-service/.env
-# BE-tiki/api-gateway/.env.development.local
-# BE-tiki/identity-service/.env.development.local
-# BE-tiki/notification-service/.env.development.local
-# BE-tiki/payment-service/.env.development.local
-# BE-tiki/product-service/.env.development.local
-# BE-tiki/api-gateway/.env.test.local
-# BE-tiki/identity-service/.env.test.local
-# BE-tiki/notification-service/.env.test.local
-# BE-tiki/payment-service/.env.test.local
-# BE-tiki/product-service/.env.test.local
-# BE-tiki/api-gateway/.env.production.local
-# BE-tiki/identity-service/.env.production.local
-# BE-tiki/notification-service/.env.production.local
-# BE-tiki/payment-service/.env.production.local
-# BE-tiki/product-service/.env.production.local
-# BE-tiki/api-gateway/.env.local
-# BE-tiki/identity-service/.env.local
-# BE-tiki/notification-service/.env.local
-# BE-tiki/payment-service/.env.local
-# BE-tiki/product-service/.env.local
+# be-tiki/api-gateway/.env
+# be-tiki/identity-service/.env
+# be-tiki/notification-service/.env
+# be-tiki/payment-service/.env
+# be-tiki/product-service/.env
+# be-tiki/api-gateway/.env.development.local
+# be-tiki/identity-service/.env.development.local
+# be-tiki/notification-service/.env.development.local
+# be-tiki/payment-service/.env.development.local
+# be-tiki/product-service/.env.development.local
+# be-tiki/api-gateway/.env.test.local
+# be-tiki/identity-service/.env.test.local
+# be-tiki/notification-service/.env.test.local
+# be-tiki/payment-service/.env.test.local
+# be-tiki/product-service/.env.test.local
+# be-tiki/api-gateway/.env.production.local
+# be-tiki/identity-service/.env.production.local
+# be-tiki/notification-service/.env.production.local
+# be-tiki/payment-service/.env.production.local
+# be-tiki/product-service/.env.production.local
+# be-tiki/api-gateway/.env.local
+# be-tiki/identity-service/.env.local
+# be-tiki/notification-service/.env.local
+# be-tiki/payment-service/.env.local
+# be-tiki/product-service/.env.local
 
 # temp directory
-BE-tiki/api-gateway/.temp
-BE-tiki/identity-service/.temp
-BE-tiki/notification-service/.temp
-BE-tiki/payment-service/.temp
-BE-tiki/product-service/.temp
-BE-tiki/api-gateway/.tmp
-BE-tiki/identity-service/.tmp
-BE-tiki/notification-service/.tmp
-BE-tiki/payment-service/.tmp
-BE-tiki/product-service/.tmp
+be-tiki/api-gateway/.temp
+be-tiki/identity-service/.temp
+be-tiki/notification-service/.temp
+be-tiki/payment-service/.temp
+be-tiki/product-service/.temp
+be-tiki/api-gateway/.tmp
+be-tiki/identity-service/.tmp
+be-tiki/notification-service/.tmp
+be-tiki/payment-service/.tmp
+be-tiki/product-service/.tmp
 
 # Runtime data
-BE-tiki/api-gateway/pids
-BE-tiki/identity-service/pids
-BE-tiki/notification-service/pids
-BE-tiki/payment-service/pids
-BE-tiki/product-service/pids
-BE-tiki/api-gateway/*.pid
-BE-tiki/identity-service/*.pid
-BE-tiki/notification-service/*.pid
-BE-tiki/payment-service/*.pid
-BE-tiki/product-service/*.pid
-BE-tiki/api-gateway/*.seed
-BE-tiki/identity-service/*.seed
-BE-tiki/notification-service/*.seed
-BE-tiki/payment-service/*.seed
-BE-tiki/product-service/*.seed
-BE-tiki/api-gateway/*.pid.lock
-BE-tiki/identity-service/*.pid.lock
-BE-tiki/notification-service/*.pid.lock
-BE-tiki/payment-service/*.pid.lock
-BE-tiki/product-service/*.pid.lock
+be-tiki/api-gateway/pids
+be-tiki/identity-service/pids
+be-tiki/notification-service/pids
+be-tiki/payment-service/pids
+be-tiki/product-service/pids
+be-tiki/api-gateway/*.pid
+be-tiki/identity-service/*.pid
+be-tiki/notification-service/*.pid
+be-tiki/payment-service/*.pid
+be-tiki/product-service/*.pid
+be-tiki/api-gateway/*.seed
+be-tiki/identity-service/*.seed
+be-tiki/notification-service/*.seed
+be-tiki/payment-service/*.seed
+be-tiki/product-service/*.seed
+be-tiki/api-gateway/*.pid.lock
+be-tiki/identity-service/*.pid.lock
+be-tiki/notification-service/*.pid.lock
+be-tiki/payment-service/*.pid.lock
+be-tiki/product-service/*.pid.lock
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
-BE-tiki/api-gateway/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-BE-tiki/identity-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-BE-tiki/notification-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-BE-tiki/payment-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-BE-tiki/product-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+be-tiki/api-gateway/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+be-tiki/identity-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+be-tiki/notification-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+be-tiki/payment-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+be-tiki/product-service/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

@@ -15,11 +15,11 @@
 #       matrix:
 #         node-version: [18.x]
 #         service:
-#           - "BE-tiki/api-gateway"
-#           - "BE-tiki/identity-service"
-#           - "BE-tiki/notification-service"
-#           - "BE-tiki/payment-service"
-#           - "BE-tiki/product-service"
+#           - "be-tiki/api-gateway"
+#           - "be-tiki/identity-service"
+#           - "be-tiki/notification-service"
+#           - "be-tiki/payment-service"
+#           - "be-tiki/product-service"
 #           - "tiki-main"
 
 #     steps:

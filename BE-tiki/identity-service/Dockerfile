@@ -1,7 +1,7 @@
 FROM node:20
 
 # WORKDIR /root/identity-service
-WORKDIR /home/ubuntu/Tiki/BE-tiki/identity-service
+WORKDIR /home/ubuntu/Tiki/be-tiki/identity-service
 
 COPY package.json .
    
