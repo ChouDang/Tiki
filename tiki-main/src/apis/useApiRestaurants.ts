@@ -33,19 +33,34 @@ const useApiRestaurants = () => {
     }
   }
 
+  const fetchQuery = async (id: string, page: number, size: number, query: string) => {
+    const resp = await axiosInstance.get<CustomRestaurant>(servicePath + '/categories/foods', {
+      params: {
+        ...(id != "all" && id && { categorie: id }),
+        page,
+        size,
+        query
+      }
+    })
+
+    if (resp) {
+      if (!query.length && id == 'all') {
+        localStorage.setItem('query_cache', JSON.stringify(resp))
+      }
+      return resp
+    }
+  }
+
   const getRestaurantsByIdCategory = async (id: string, page: number, size: number, query: string) => {
     try {
-      const resp = await axiosInstance.get<CustomRestaurant>(servicePath + '/categories/foods', {
-        params: {
-          ...(id != "all" && id && { categorie: id }),
-          page,
-          size,
-          query
+      if (!query.length && id == 'all') {
+        let checkCache = localStorage.getItem('query_cache')
+        if (checkCache) {
+          fetchQuery(id, page, size, query)
+          return JSON.parse(checkCache)
         }
-      })
-      if (resp) {
-        return resp
       }
+      return await fetchQuery(id, page, size, query)
     } catch (error) {
       notification.open({
         message: `${error}`,

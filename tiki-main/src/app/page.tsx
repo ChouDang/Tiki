@@ -31,17 +31,17 @@ export default function Home() {
   const [opts, set_opts] = useState<OptsCategory[]>([])
   const [pagi, set_pagi] = useState({
     page: 1,
-    size: 18,
+    size: 12,
     total: 0
   })
-  const blockFetch = useRef(false)
   const [isShowRes, set_isShowRes] = useState(true)
   // danh sach theo danh muc 
   useEffect(() => {
-    if (select && !blockFetch.current) {
+    if (select) {
       if (!opts.length) {
         let checkStoreLocal = localStorage.getItem("allCategory")
         if (!!checkStoreLocal) {
+          console.log(checkStoreLocal, "checkStoreLocal")
           set_items(JSON.parse(checkStoreLocal))
           set_opts([
             { id: "all", name: "Tất cả", value: "all", label: 'Tất cả' },
@@ -58,7 +58,7 @@ export default function Home() {
             )
         }
       }
-      getRestaurantsByIdCategory(select as string, pagi.page, 100, ("") as string).then(i => {
+      getRestaurantsByIdCategory(select as string, pagi.page, 1000, ("") as string).then(i => {
         if (i?.data) {
           let idata: CustomRestaurant = i.data
           set_lstData((idata.data || []) as Restaurant[])
@@ -70,17 +70,12 @@ export default function Home() {
       })
       set_select(select as string)
     }
-  }, [select])
-
-  // console.log(items, "items")
-  // console.log(select, "select")
-  // console.log(opts, "opts")
-  // console.log(lstData, "lstData")
+  }, [])
 
   const onFetchMore = () => {
     set_pagi(prev => ({
       ...prev,
-      size: prev.size + 18
+      size: prev.size + 12
     }))
   }
 
@@ -91,19 +86,20 @@ export default function Home() {
           ...food,
           madeIn: data.name,
           idStore: data.id
-        })).filter(i=> select === 'all' ? true: i.category_id === select)
+        })).filter(i => select === 'all' ? true : i.category_id === select)
       )
       let initData = maxLength.slice(0, (pagi as any).size)
+   
       set_isShowRes(maxLength.length !== initData.length)
       return initData
     }
     return []
-  }, [lstData, pagi.size])
+  }, [lstData, select, pagi.size])
 
   const onChangeSelect = (vl: any) => {
     set_pagi(prev => ({
       ...prev,
-      size: 18
+      size: 12
     }))
     set_select(vl)
   }
@@ -297,7 +293,7 @@ export default function Home() {
         </div>
 
         <div className='relative rounded-lg mb-4 flex flex-col' ref={targetRef}>
-          <div className='bg-white rounded-tl-xl rounded-tr-xl pr-1 pt-4 mb-2'>
+          <div className='bg-white rounded-tl-xl rounded-tr-xl pr-1 pt-4 mb-2' style={{ minWidth: '100vw' }}>
             <span className='font-semibold text-md ml-3'>Gợi ý hôm nay</span>
             <div className='flex flex-row mt-5'>
 
