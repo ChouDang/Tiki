@@ -4,6 +4,7 @@ import { notification } from "antd";
 const servicePath = "/categories"
 
 const useApiCatory = () => {
+
   const getAllCategory = async () => {
     try {
       const resp = await axiosInstance.get<Category[]>(servicePath)

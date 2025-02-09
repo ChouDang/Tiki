@@ -41,7 +41,6 @@ export default function Home() {
       if (!opts.length) {
         let checkStoreLocal = localStorage.getItem("allCategory")
         if (!!checkStoreLocal) {
-          console.log(checkStoreLocal, "checkStoreLocal")
           set_items(JSON.parse(checkStoreLocal))
           set_opts([
             { id: "all", name: "Tất cả", value: "all", label: 'Tất cả' },
@@ -52,7 +51,7 @@ export default function Home() {
             .then(resp => {
               if (resp && Array.isArray(resp) && resp.length) {
                 set_items(resp.data)
-                set_opts([{ id: "all", name: "Tất cả", value: "all", label: 'Tất cả' }, ...resp.map(x => ({ ...x, value: x.id, label: x.name })) as OptsCategory[]])
+                set_opts([{ id: "all", name: "Tất cả", value: "all", label: 'Tất cả' }, ...resp.data.map(x => ({ ...x, value: x.id, label: x.name })) as OptsCategory[]])
               }
             }
             )
@@ -89,7 +88,7 @@ export default function Home() {
         })).filter(i => select === 'all' ? true : i.category_id === select)
       )
       let initData = maxLength.slice(0, (pagi as any).size)
-   
+
       set_isShowRes(maxLength.length !== initData.length)
       return initData
     }
