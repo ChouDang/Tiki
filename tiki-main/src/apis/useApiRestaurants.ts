@@ -10,7 +10,6 @@ const useApiRestaurants = () => {
     try {
       const resp = await axiosInstance.get<Restaurant[]>(servicePath)
       if (resp) {
-        localStorage.setItem('allRestaurants', JSON.stringify(resp.data))
         return resp
       }
     } catch (error) {
