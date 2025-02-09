@@ -57,7 +57,7 @@ export default function Page() {
   return (
     <>
       <nav>
-        <Suspense fallback={<>Loading</>}>
+        <Suspense fallback={<></>}>
           <div className='flex flex-row flex-wrap gap-2 mb-5'>
             {products.map((product: any) => (
               <CardProduct
