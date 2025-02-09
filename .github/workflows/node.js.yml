@@ -75,7 +75,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
 
           ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
-            cd /home/ubuntu/project
+            cd /home/ubuntu/Tiki
             git pull origin main
             docker-compose down
             docker-compose build
