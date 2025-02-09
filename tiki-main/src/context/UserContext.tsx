@@ -16,7 +16,7 @@ type UserAction =
 // Khởi tạo UserContext
 const UserContext = createContext<{
   state: UserState;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => any;
   logout: () => void;
   signUp: (a: any) => any;
 }>({
@@ -65,17 +65,25 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       dispatch({ type: 'LOGIN', payload: response.data.user });
-      router.replace('/');
+      // router.replace('/');
+      return response
     } catch (error) {
       console.error('Login failed:', error);
       alert('Invalid credentials, please try again.');
+      return null
     }
   };
 
   const signUp = async (data: any) => {
     try {
-      const response = await axiosInstance.post('/auth/sign-up', data);
-      return response
+      if (Object.values(data).some(value =>
+        value === null || value === undefined || value == ""
+      )) {
+        return false
+      } {
+        const response = await axiosInstance.post('/auth/sign-up', data);
+        return response
+      }
     } catch (error) {
       console.error('Login failed:', error);
       alert('Invalid, please try again.');

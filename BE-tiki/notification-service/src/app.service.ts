@@ -15,7 +15,7 @@ export class AppService {
     configMail.sendMail({
       from: "hoaitrongdang@gmail.com",
       to: data,
-      subject: "Đặt hàng qua Amazon",
+      subject: "Đặt hàng qua Tiki đang được giao",
       html: "<h1> Xác nhận đơn hàng thành công </h1>"
     }, error => error);
   }
@@ -31,8 +31,8 @@ export class AppService {
     configMail.sendMail({
       from: "hoaitrongdang@gmail.com",
       to: data,
-      subject: "Đặt hàng qua Beamin",
-      html: "<h1 style='color:red' > Đặt hàng thành công </h1>"
+      subject: "Đặt hàng qua Tiki",
+      html: "<h1 style='color:red' > Hàng đã được giao đến nơ </h1>"
     }, error => error);
   }
 }

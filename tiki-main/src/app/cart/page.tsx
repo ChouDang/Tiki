@@ -1,5 +1,5 @@
 'use client';
-import { Checkbox, InputNumber, Tooltip } from 'antd';
+import { Checkbox, InputNumber, message, notification, Tooltip } from 'antd';
 import Image from 'next/image';
 import {
   TrashIcon,
@@ -20,33 +20,42 @@ import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const router = useRouter();
-  const { state: user } = useUser()
+  const { state: user, } = useUser()
   const { state: { items }, dispatch } = useCart()
   const { onInitOrderFood } = useApiPayment()
 
+
   const handleNavigate = async () => {
-    const resp = await onInitOrderFood({
+    if (!items?.length) return notification.open({
+      message: `Hiện không có sản phẩm để thanh toán vui lòng chọn sản phẩm`,
+    });
+    if (user?.isLoggedIn) {
+      const resp = await onInitOrderFood({
         userId: user.user?.id,
         items: items.map(i => ({
-            foodId: i.id,
-            quantity: i.quantity
+          foodId: i.id,
+          quantity: i.quantity
         })),
         email: user.user?.email
-    })
-    if (resp) {
+      })
+      if (resp) {
         router.push('/order/' + resp.data.order.id);
         setTimeout(() => {
-            dispatch({ type: "CLEAR_CART" })
-            localStorage.removeItem('Cart')
+          dispatch({ type: "CLEAR_CART" })
+          localStorage.removeItem('Cart')
         }, 1000)
+      }
+    } else {
+      let el: any = document.querySelector('.trigger-open-modal')
+      if (el) el?.click()
     }
-};
+  };
 
   return (
     <div className='w-[75%] flex-row flex'>
       <div>
         <span className='uppercase font-medium text-xl'>Giỏ hàng</span>
-        <div className='h-8 rounded-md flex flex-row  bg-white items-center text-sm'>
+        <div className='h-8 rounded-md flex flex-row  bg-white items-center text-sm w-[100%] min-w-[770px] ' >
           <div className='ml-2 w-[45%] max-w-[45%] flex items-center gap-3'>
             {/* <Checkbox />
             <span className='text-sm'>Tất cả sản phẩm </span> */}
@@ -65,30 +74,40 @@ export default function Page() {
           </span>
         </div>
         <div className='w-full flex flex-col bg-white mt-2 pt-5 rounded-md mb-5'>
-          {items.length && items.map((product: any) => (
+          {items.length ? items.map((product: any) => (
             <ItemCart product={product} dispatch={dispatch} />
-          ))}
+          )) : <></>}
         </div>
       </div>
       <div className='w-[25%] mt-7 ml-5'>
         <div className='bg-white rounded-md p-4'>
-          <div className='flex justify-between'>
-            <span className='text-gray-500'>Giao tới</span>
-            <span className='text-blue-500 text-sm'>Thay đổi</span>
-          </div>
-          <span className='text-sm font-semibold'>
-            {(user?.user?.firstname + " " + user?.user?.lastname) || ""}
-            <span className='text-gray-200 inline-block px-1'>|</span>{' '}
-            {user.user?.phonenumber}
-          </span>
-          <div>
-            <span className='bg-gray-50 p-1 rounded-sm text-xs font-semibold text-green-500 mr-2'>
-              Nhà
+
+
+          {user?.isLoggedIn ? <>
+            <div className='flex justify-between'>
+              <span className='text-gray-500'>Giao tới</span>
+              <span className='text-blue-500 text-sm'>Thay đổi</span>
+            </div>
+            <span className='text-sm font-semibold'>
+              {(user?.user?.firstname + " " + user?.user?.lastname) || ""}
+              <span className='text-gray-200 inline-block px-1'>|</span>{' '}
+              {user.user?.phonenumber}
             </span>
-            <span className='text-gray-500 text-sm'>
-              13 Đường số 14, Phường An Lạc A, Quận Bình Tân, Hồ Chí Minh
+            <div>
+              <span className='bg-gray-50 p-1 rounded-sm text-xs font-semibold text-green-500 mr-2'>
+                Nhà
+              </span>
+              <span className='text-gray-500 text-sm'>
+                13 Đường số 14, Phường An Lạc A, Quận Bình Tân, Hồ Chí Minh
+              </span>
+            </div>
+          </> : <>
+            <span className='text-sm font-semibold'>
+              Vui lòng đăng nhập để thanh toán
             </span>
-          </div>
+          </>
+
+          }
         </div>
         <div className='bg-white mt-3 p-4 rounded-md'>
           <div className='flex flex-row justify-between items-center'>

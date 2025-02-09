@@ -15,13 +15,15 @@ import {
 import { MapPinIcon, FaceSmileIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Button, Input, Modal, Space } from 'antd';
+import { Badge, Button, Input, Modal, Space } from 'antd';
 import { useUser } from '@/context/UserContext';
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { useCart } from '@/context/CartContext';
 
 export const Header = () => {
 
   const { login, signUp, logout, state } = useUser()
+  const { state: cart } = useCart()
   const { isLoggedIn } = state
   const [error, set_error] = React.useState(false)
   const [formLogin, set_formLogin] = React.useState({
@@ -67,15 +69,15 @@ export const Header = () => {
     router.push(`/search?query=${refSearch.current.value}`);
   };
 
-    // const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
-    //     let qr = `?query=${encodeURIComponent(value)}`
-    //     if (pathName?.includes("category")) {
-    //         let id = pathName.split("category/")[1]
-    //         router.replace(`/category/` + id + "/" + qr);
-    //     } else {
-    //         router.push(`/category/all` + qr);
-    //     }
-    // };
+  // const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
+  //     let qr = `?query=${encodeURIComponent(value)}`
+  //     if (pathName?.includes("category")) {
+  //         let id = pathName.split("category/")[1]
+  //         router.replace(`/category/` + id + "/" + qr);
+  //     } else {
+  //         router.push(`/category/all` + qr);
+  //     }
+  // };
 
   const handleChange = (value: string, key: string) => {
     set_status(null)
@@ -97,7 +99,15 @@ export const Header = () => {
 
   function handleLogin() {
     function actCheckVal(_email: string, _password: string) {
-      return Boolean(_email.trim()) && Boolean(_password.trim()) ? login(_email, _password) : set_error(true)
+      if (Boolean(_email.trim()) && Boolean(_password.trim())) {
+        login(_email, _password).then((res:any) => {
+          if (res) {
+            setIsModalOpen(false)
+          }
+        })
+      } else {
+        set_error(true)
+      }
     }
     actCheckVal(formLogin.email, formLogin.password)
   }
@@ -140,12 +150,15 @@ export const Header = () => {
                   Tìm kiếm
                 </button>
               }
-              className='w-[58rem]'
+              // className='w-[58rem]'
+              style={{
+                width: 900
+              }}
               icon={<MagnifyingGlassIcon className='size-5 text-gray-500' />}
               placeholder='Bạn tìm kiếm gì hôm nay?'
             />
 
-            <div className='flex flex-row gap-2 self-start ml-20'>
+            <div className='flex flex-row gap-2 self-start'>
               <Link
                 href='/'
                 className='flex flex-row gap-1 cursor-pointer hover:bg-[#0a68ff33] font-medium w-fit p-2 rounded text-sm items-center justify-center'
@@ -186,7 +199,9 @@ export const Header = () => {
                 href='/cart'
                 className='ml-10 relative flex flex-row gap-1 cursor-pointer hover:bg-[#0a68ff33] w-fit p-2 rounded text-sm items-center justify-center before:w-[1px] before:h-3/6 before:absolute before:bg-[#BFC4CC] before:-left-5'
               >
-                <ShoppingCartIcon className='size-6 text-[#0560D9]' />
+                <Badge count={(cart && cart?.items?.length) || 0}>
+                  <ShoppingCartIcon className='size-6 text-[#0560D9]' />
+                </Badge>
               </Link>
             </div>
           </div>
@@ -252,6 +267,7 @@ export const Header = () => {
           <TagIcon className='size-5 text-[#0560D9]' />
           <span className='text-xs'>Giá siêu rẻ</span>
         </div>
+        <div className='trigger-open-modal hidden' onClick={() => setIsModalOpen(true)}></div>
         <Modal
           closable={false}
           title={null}
@@ -376,7 +392,8 @@ export const Header = () => {
                       {error && <p>Tài Khoảng hoặc Mật Khẩu không đúng</p>}
                     </div>
                     : <div className="flex flex-col w-full ">
-                      {status == null ? <></> : status ? "Đăng ký thành công" : "Đặng ký thất bạiÏ"}
+                      {status == null ? <></> : status
+                        ? "Đăng ký thành công hãy đi đến đăng nhập" : "Đặng ký thất bại"}
                     </div>
                 }
               </div>

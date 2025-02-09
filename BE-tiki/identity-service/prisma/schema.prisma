@@ -18,7 +18,7 @@ model foods {
   name          String       @db.VarChar(255)
   description   String?
   price         Decimal      @db.Decimal(10, 2)
-  img           String?      @db.VarChar(255)
+  img           String?
   stock         Int          @default(0)
   restaurant_id String?      @db.Uuid
   category_id   String?      @db.Uuid

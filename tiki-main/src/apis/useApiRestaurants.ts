@@ -4,7 +4,7 @@ import { notification } from "antd";
 const servicePath = "/restaurants"
 
 const useApiRestaurants = () => {
-  const [api] = notification.useNotification();
+
 
   const getAllRestaurants = async () => {
     try {
@@ -14,8 +14,8 @@ const useApiRestaurants = () => {
         return resp
       }
     } catch (error) {
-      api.error({
-        message: `${error}`
+      notification.open({
+        message: `${error}`,
       });
     }
   }
@@ -27,8 +27,8 @@ const useApiRestaurants = () => {
         return resp
       }
     } catch (error) {
-      api.error({
-        message: `${error}`
+      notification.open({
+        message: `${error}`,
       });
     }
   }
@@ -37,7 +37,7 @@ const useApiRestaurants = () => {
     try {
       const resp = await axiosInstance.get<CustomRestaurant>(servicePath + '/categories/foods', {
         params: {
-          ...(id != "all" && id && { categorie: id }) ,
+          ...(id != "all" && id && { categorie: id }),
           page,
           size,
           query
@@ -47,8 +47,8 @@ const useApiRestaurants = () => {
         return resp
       }
     } catch (error) {
-      api.error({
-        message: `${error}`
+      notification.open({
+        message: `${error}`,
       });
     }
   }

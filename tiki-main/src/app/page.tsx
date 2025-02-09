@@ -91,7 +91,7 @@ export default function Home() {
           ...food,
           madeIn: data.name,
           idStore: data.id
-        }))
+        })).filter(i=> select === 'all' ? true: i.category_id === select)
       )
       let initData = maxLength.slice(0, (pagi as any).size)
       set_isShowRes(maxLength.length !== initData.length)
@@ -101,7 +101,6 @@ export default function Home() {
   }, [lstData, pagi.size])
 
   const onChangeSelect = (vl: any) => {
-    set_lstData([])
     set_pagi(prev => ({
       ...prev,
       size: 18
