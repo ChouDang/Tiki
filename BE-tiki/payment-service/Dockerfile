@@ -1,10 +1,10 @@
 FROM node:20
 
-# WORKDIR /root/product-service
-WORKDIR /home/ubuntu/Tiki/BE_tiki/product-service
+# WORKDIR /root/payment-service
+WORKDIR /home/ubuntu/BE-tiki/Tiki/payment-service
 
 COPY package.json .
-
+   
 RUN yarn config set network-timeout 3000000
 RUN yarn install
 

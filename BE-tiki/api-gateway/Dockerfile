@@ -1,7 +1,7 @@
 FROM node:20
 
 # WORKDIR /root/api-gateway
-WORKDIR /home/ubuntu/Tiki/BE_tiki/api-gateway
+WORKDIR /home/ubuntu/Tiki/BE-tiki/api-gateway
 
 COPY package.json .
 
