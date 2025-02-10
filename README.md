@@ -36,11 +36,11 @@
 - Thanh toán gửi email xác nhận sau đó tự trừ tồn kho và ra đơn orders và liên kết bằng order_product sau đó 10s sẽ gửi email giao hàng thành công
 
 ##  PostgreSQL Relation Table 
-- categories - foods: 1-n (1 danh mục có nhiều món ăn).
-- restaurants - foods: 1-n (1 nhà hàng có nhiều món ăn).
-- orders - order_food: 1-n (1 đơn hàng có nhiều món ăn).
+- categories - foods: 1-n (1 danh mục có nhiều sản phẩm).
+- restaurants - foods: 1-n (1 danh mục có nhiều sản phẩm).
+- orders - order_food: 1-n (1 đơn hàng có nhiều sản phẩm).
 - users - orders: 1-n (1 người dùng có nhiều đơn hàng).
-- products - order_product: n-n (Nhiều món ăn có thể nằm trong nhiều đơn hàng).
+- products - order_product: n-n (Nhiều sản phẩm có thể nằm trong nhiều đơn hàng).
 
 ## API: 
 - **User**: login, đăng ký, CRUD user 	
